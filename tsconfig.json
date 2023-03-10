@@ -17,7 +17,7 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "allowUnreachableCode": false,
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "plugins": [{ "name": "typescript-plugin-scss-modules" }]
   },
   "exclude": [
     "node_modules",
