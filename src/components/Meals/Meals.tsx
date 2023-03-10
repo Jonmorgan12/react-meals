@@ -1,6 +1,6 @@
 import React from "react";
-import MealsSummary from "./MealsSummary.tsx";
-import AvailableMeals from "./AvailableMeals.tsx";
+import MealsSummary from "./MealsSummary";
+import AvailableMeals from "./AvailableMeals";
 
 const Meals = () => {
   return (

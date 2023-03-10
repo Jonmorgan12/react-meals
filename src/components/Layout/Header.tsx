@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderCartButton from "./HeaderCartButton/HeaderCartButton.tsx";
+import HeaderCartButton from "./HeaderCartButton/HeaderCartButton";
 import styles from "../../styles/Header.module.scss";
 import image from "../../assets/react-meals.jpeg";
 
