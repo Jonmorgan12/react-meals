@@ -2,7 +2,11 @@ import React from "react";
 import Modal from "../UI/Modal";
 import styles from "../../styles/Cart.module.scss";
 
-const Cart = (props: any) => {
+interface CartPropTypes {
+  onCloseCart: () => void;
+}
+
+const Cart = ({ onCloseCart }: CartPropTypes) => {
   const cartItems = (
     <ul className={styles["cart-items"]}>
       {[{ id: "c1", name: "sushi", amount: 2, price: 12.99 }].map((item) => (
@@ -19,7 +23,9 @@ const Cart = (props: any) => {
         <span>35.56</span>
       </div>
       <div className={styles.actions}>
-        <button className={styles["button--alt"]}>Close</button>
+        <button className={styles["button--alt"]} onClick={onCloseCart}>
+          Close
+        </button>
         <button className={styles.button}>Order</button>
       </div>
     </Modal>
