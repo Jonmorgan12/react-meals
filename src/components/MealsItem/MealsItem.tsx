@@ -1,4 +1,5 @@
 import React from "react";
+import MealItemForm from "./MealsItemForm";
 import { MealsItemPropTypes } from "../../types/mealsItems";
 import styles from "../../styles/MealsItem.module.scss";
 
@@ -10,7 +11,9 @@ const MealsItem = ({ name, description, price }: MealsItemPropTypes) => {
         <div className={styles.description}>{description}</div>
         <div className={styles.price}>${price.toFixed(2)}</div>
       </div>
-      <div></div>
+      <div>
+        <MealItemForm />
+      </div>
     </li>
   );
 };
