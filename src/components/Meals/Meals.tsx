@@ -1,3 +1,4 @@
+import React from "react";
 import MealsSummary from "./MealsSummary.tsx";
 import AvailableMeals from "./AvailableMeals.tsx";
 

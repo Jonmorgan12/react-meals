@@ -1,3 +1,5 @@
+import React from "react";
+import Card from "../UI/Card.tsx";
 import { DummyMealsType } from "../../types/dummyMeals";
 import styles from "../../styles/AvailableMeals.module.scss";
 
@@ -31,11 +33,13 @@ const DUMMY_MEALS: DummyMealsType[] = [
 const AvailableMeals = () => {
   return (
     <section className={styles.meals}>
-      <ul>
-        {DUMMY_MEALS.map((meal, id) => {
-          return <li key={id}>{meal.name}</li>;
-        })}
-      </ul>
+      <Card>
+        <ul>
+          {DUMMY_MEALS.map((meal, id) => {
+            return <li key={id}>{meal.name}</li>;
+          })}
+        </ul>
+      </Card>
     </section>
   );
 };

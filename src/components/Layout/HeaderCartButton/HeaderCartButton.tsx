@@ -1,3 +1,4 @@
+import React from "react";
 import CartIcon from "../../Cart/CartIcon.tsx";
 import styles from "../../../styles/HeaderCartButton.module.scss";
 

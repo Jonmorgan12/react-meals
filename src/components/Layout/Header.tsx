@@ -1,3 +1,4 @@
+import React from "react";
 import HeaderCartButton from "./HeaderCartButton/HeaderCartButton.tsx";
 import styles from "../../styles/Header.module.scss";
 import image from "../../assets/react-meals.jpeg";
