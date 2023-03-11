@@ -1,14 +1,27 @@
-import React from "react";
-import { InputPropTypes } from "../../types/Input";
+import React, { forwardRef } from "react";
 import styles from "../../styles/Input.module.scss";
 
-const Input = ({ label, input }: InputPropTypes) => {
+export interface InputTypes {
+  id: "amount";
+  type: "number";
+  min: "1";
+  max: "5";
+  step: "1";
+  defaultValue: "1";
+}
+
+export interface InputPropTypes {
+  label: string;
+  input: InputTypes;
+}
+
+const Input = forwardRef(({ label, input }: InputPropTypes, ref) => {
   return (
     <div className={styles.input}>
       <label htmlFor={input.id}>{label}</label>
-      <input {...input} />
+      <input ref={ref} {...input} />
     </div>
   );
-};
+});
 
 export default Input;
