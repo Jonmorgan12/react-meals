@@ -11,7 +11,7 @@ interface ModalPropTypes {
   children: React.ReactNode;
 }
 
-interface ModalOverlayProps {
+interface ModalOverlayPropTypes {
   children: React.ReactNode;
 }
 
@@ -19,7 +19,7 @@ const Backdrop = ({ onClose }: BackdropPropTypes) => {
   return <div className={styles.backdrop} onClick={onClose}></div>;
 };
 
-const ModalOverlay = ({ children }: ModalOverlayProps) => {
+const ModalOverlay = ({ children }: ModalOverlayPropTypes) => {
   return (
     <div className={styles.modal}>
       <div className={styles.content}>{children}</div>
