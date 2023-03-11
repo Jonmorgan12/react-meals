@@ -3,10 +3,10 @@ import Modal from "../UI/Modal";
 import styles from "../../styles/Cart.module.scss";
 
 interface CartPropTypes {
-  onCloseCart: () => void;
+  onClose: () => void;
 }
 
-const Cart = ({ onCloseCart }: CartPropTypes) => {
+const Cart = ({ onClose }: CartPropTypes) => {
   const cartItems = (
     <ul className={styles["cart-items"]}>
       {[{ id: "c1", name: "sushi", amount: 2, price: 12.99 }].map((item) => (
@@ -16,14 +16,14 @@ const Cart = ({ onCloseCart }: CartPropTypes) => {
   );
 
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       {cartItems}
       <div className={styles.total}>
         <span>Total amount</span>
         <span>35.56</span>
       </div>
       <div className={styles.actions}>
-        <button className={styles["button--alt"]} onClick={onCloseCart}>
+        <button className={styles["button--alt"]} onClick={onClose}>
           Close
         </button>
         <button className={styles.button}>Order</button>
