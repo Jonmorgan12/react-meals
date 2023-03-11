@@ -15,13 +15,15 @@ export interface InputPropTypes {
   input: InputTypes;
 }
 
-const Input = forwardRef(({ label, input }: InputPropTypes, ref) => {
-  return (
-    <div className={styles.input}>
-      <label htmlFor={input.id}>{label}</label>
-      <input ref={ref} {...input} />
-    </div>
-  );
-});
+const Input = forwardRef<HTMLInputElement, InputPropTypes>(
+  ({ label, input }, ref) => {
+    return (
+      <div className={styles.input}>
+        <label htmlFor={input.id}>{label}</label>
+        <input ref={ref} {...input} />
+      </div>
+    );
+  }
+);
 
 export default Input;

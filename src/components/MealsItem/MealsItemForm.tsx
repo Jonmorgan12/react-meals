@@ -2,27 +2,33 @@ import React, { useRef, useState } from "react";
 import Input from "../UI/Input";
 import styles from "../../styles/MealsItemForm.module.scss";
 
-const MealsItemForm = () => {
+// interface RefObject {
+//   amountInputRef: () => void;
+// }
+
+const MealsItemForm = ({ onAddToCart }: any) => {
   const [amountIsValid, setAmountIsValid] = useState(true);
-  const amountInputRef = useRef();
+  const amountInputRef = useRef<HTMLInputElement | null>(null);
 
   // NOTE: fix event
   const submitHandler = (event: any) => {
     event.preventDefault();
 
     // NOTE: Fix ts error here
-    const enteredAmount = amountInputRef.current.value;
+    const enteredAmount = amountInputRef?.current?.value;
     // NOTE: Converts string to number +
-    const enteredAmountNumber = +enteredAmount;
+    const enteredAmountNumber = +(enteredAmount || "");
 
     if (
-      enteredAmount.trim().length === 0 ||
+      enteredAmount?.trim().length === 0 ||
       enteredAmountNumber < 1 ||
       enteredAmountNumber > 5
     ) {
       setAmountIsValid(false);
       return;
     }
+
+    onAddToCart(enteredAmountNumber);
   };
   return (
     <form className={styles.form} onSubmit={submitHandler}>
