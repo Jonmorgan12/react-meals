@@ -15,9 +15,13 @@ const Cart = ({ onClose }: CartPropTypes) => {
 
   const hasItems = cartCtx.items.length > 0;
 
-  const cartItemRemoveHandler = (id: any) => {};
+  const cartItemRemoveHandler = (id: string) => {
+    cartCtx.removeItem(id);
+  };
 
-  const cartItemAddHandler = (item: any) => {};
+  const cartItemAddHandler = (item: object) => {
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
 
   const cartItems = (
     <ul className={styles["cart-items"]}>
