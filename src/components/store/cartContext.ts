@@ -1,9 +1,11 @@
 import { createContext } from "react";
 
 interface CartItemsType {
+  id: string;
   items: [];
-  // fix this
-  amount: any;
+  name: string;
+  amount: number;
+  price: number;
 }
 
 interface CartContextTypes {

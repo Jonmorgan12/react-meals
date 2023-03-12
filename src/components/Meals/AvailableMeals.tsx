@@ -1,8 +1,14 @@
 import React from "react";
 import Card from "../UI/Card";
 import MealsItem from "../MealsItem/MealsItem";
-import { DummyMealsType } from "../../types/dummyMeals";
 import styles from "../../styles/AvailableMeals.module.scss";
+
+interface DummyMealsType {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+}
 
 const DUMMY_MEALS: DummyMealsType[] = [
   {
