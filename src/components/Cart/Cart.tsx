@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import CartContext from "../store/cartContext";
 import Modal from "../UI/Modal";
 import CartItem from "../Cart/CartItem";
+import Checkout from "../Cart/Checkout";
 import styles from "../../styles/Cart.module.scss";
 
 interface CartPropTypes {
@@ -9,6 +10,7 @@ interface CartPropTypes {
 }
 
 const Cart = ({ onClose }: CartPropTypes) => {
+  const [isOrdered, setIsOrdered] = useState<boolean>(false);
   const cartCtx = useContext(CartContext);
 
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
@@ -21,6 +23,10 @@ const Cart = ({ onClose }: CartPropTypes) => {
 
   const cartItemAddHandler = (item: object) => {
     cartCtx.addItem({ ...item, amount: 1 });
+  };
+
+  const handleOrder = () => {
+    setIsOrdered(true);
   };
 
   const cartItems = (
@@ -45,12 +51,19 @@ const Cart = ({ onClose }: CartPropTypes) => {
         <span>Total amount</span>
         <span>{totalAmount}</span>
       </div>
-      <div className={styles.actions}>
-        <button className={styles["button--alt"]} onClick={onClose}>
-          Close
-        </button>
-        {hasItems && <button className={styles.button}>Order</button>}
-      </div>
+      {isOrdered && <Checkout onCancel={onClose} />}
+      {!isOrdered && (
+        <div className={styles.actions}>
+          <button className={styles["button--alt"]} onClick={onClose}>
+            Close
+          </button>
+          {hasItems && (
+            <button className={styles.button} onClick={handleOrder}>
+              Order
+            </button>
+          )}
+        </div>
+      )}
     </Modal>
   );
 };

@@ -1,59 +1,85 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../UI/Card";
 import MealsItem from "../MealsItem/MealsItem";
 import styles from "../../styles/AvailableMeals.module.scss";
 
-interface DummyMealsType {
+interface MealsDataType {
   id: string;
   name: string;
   description: string;
   price: number;
 }
 
-const DUMMY_MEALS: DummyMealsType[] = [
-  {
-    id: "m1",
-    name: "Sushi",
-    description: "Finest fish and veggies",
-    price: 22.99,
-  },
-  {
-    id: "m2",
-    name: "Schnitzel",
-    description: "A german specialty!",
-    price: 16.5,
-  },
-  {
-    id: "m3",
-    name: "Barbecue Burger",
-    description: "American, raw, meaty",
-    price: 12.99,
-  },
-  {
-    id: "m4",
-    name: "Green Bowl",
-    description: "Healthy...and green...",
-    price: 18.99,
-  },
-];
-
 const AvailableMeals = () => {
+  const [mealsData, setMealsData] = useState<MealsDataType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [httpError, sethttpError] = useState<undefined>(undefined);
+
+  useEffect(() => {
+    const fetchMealsData = async () => {
+      const response = await fetch(
+        "https://react-meals-85140-default-rtdb.firebaseio.com/Meals.json"
+      );
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      const responseData = await response.json();
+
+      const loadedMeals = Array();
+
+      for (const key in responseData) {
+        loadedMeals.push({
+          id: key,
+          name: responseData[key].name,
+          description: responseData[key].description,
+          price: responseData[key].price,
+        });
+      }
+
+      setMealsData(loadedMeals);
+      setIsLoading(false);
+    };
+
+    fetchMealsData().catch((error) => {
+      setIsLoading(false);
+      sethttpError(error.message);
+    });
+  }, []);
+
+  const mealsList = mealsData?.map((meal: MealsDataType) => {
+    return (
+      <MealsItem
+        key={meal.id}
+        id={meal.id}
+        name={meal.name}
+        description={meal.description}
+        price={meal.price}
+      />
+    );
+  });
+
+  if (isLoading) {
+    return (
+      <section className={styles.mealsLoading}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
+
+  if (httpError) {
+    return (
+      <section className={styles.mealsError}>
+        <p>{httpError}</p>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.meals}>
       <Card>
-        <ul>
-          {DUMMY_MEALS.map((meal) => {
-            return (
-              <MealsItem
-                key={meal.id}
-                id={meal.id}
-                name={meal.name}
-                description={meal.description}
-                price={meal.price}
-              />
-            );
-          })}
-        </ul>
+        <ul>{mealsList}</ul>
       </Card>
     </section>
   );
